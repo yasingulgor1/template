@@ -1,0 +1,85 @@
+<nav class="page-sidebar" data-pages="sidebar">
+
+    <div class="sidebar-header">
+
+        <img src="{{getDefaultLogoUri()}}" alt="logo" class="brand" data-src="{{getDefaultLogoUri()}}" width="40">
+        <div class="sidebar-header-controls">
+            <button *ngFor="let language of languageOptions" type="button" class="btn btn-link d-lg-inline-block d-xlg-inline-block d-md-inline-block d-sm-none d-none" 
+                     [class.btn-language]="!language.isCurrentLanguage"
+                     [class.btn-language-selected]="language.isCurrentLanguage"
+                     data-toggle-pin="sidebar" (click)="applyLanguage(language)" >
+                     <i [class]="language.flag"></i>
+            </button>
+        </div>
+
+        <button class="hamburger hamburger--slider" [class.is-active]="sideNavIsOpen" type="button" (click)="initSideBar()">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+        </button>
+
+    </div>
+
+    <div class="sidebar-menu">
+
+        <ul class="menu-items">
+
+            <ng-template [ngIf]="menu && menu.groups && menu.groups.length > 0">
+
+                <div *ngFor="let group of menu.groups" class="">
+
+                    <li class="group-title">
+                        <h3 class="group-item_name">{{group.title}}</h3>
+                    </li>
+
+                    <li class="m-t-10" *ngFor="let item of group.items">
+                        <a href="{{item.routeUrl}}" target="_blank">
+                            <span class="title" [innerHtml]="item.title"></span>
+                        </a>
+                        <span class="icon-thumbnail tippy" title="{{item.title}}" (mouseenter)="sideNavOnHover()">
+                            <a href="{{item.routeUrl}}">
+
+                                <ng-template [ngIf]="item.iconType == 0">
+                                    <i [class]="item.icon"></i>
+                                </ng-template>
+
+                                <ng-template [ngIf]="item.iconType == 1">
+                                    <img style="width:30px" [src]="item.iconUrl">
+                                </ng-template>
+                            </a>
+                        </span>
+                    </li>
+
+                </div>
+
+            </ng-template>
+
+            <ng-template [ngIf]="menu && menu.items && menu.items.length > 0">
+
+                <li class="m-t-15" *ngFor="let item of menu.items">
+                    <a href="{{item.routeUrl}}" target="_blank">
+                        <span class="title" [innerHtml]="item.title"></span>
+                    </a>
+                    <span class="icon-thumbnail tippy" title="{{item.title}}" (mouseenter)="sideNavOnHover()">
+                        <a href="{{item.routeUrl}}">
+
+                            <ng-template [ngIf]="item.iconType == 0">
+                                <i [class]="item.icon"></i>
+                            </ng-template>
+
+                            <ng-template [ngIf]="item.iconType == 1">
+                                <img style="width:30px;" [src]="item.iconUrl">
+                            </ng-template>
+                        </a>
+                    </span>
+                </li>
+
+            </ng-template>
+
+        </ul>
+
+        <div class="clearfix"></div>
+
+    </div>
+
+</nav>

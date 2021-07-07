@@ -1,0 +1,67 @@
+<div class="filter-section">
+  <div class="pull-right relative">
+    <a (click)="isFilterOpen =! isFilterOpen" class="advance-btn color-primary m-t-10"><i
+        class="ion ion-md-funnel"></i></a>
+    <div class="advance-filter-content" *ngIf="isFilterOpen">
+      <h5>Avansları Fitrele</h5>
+      <div class="form-group">
+        <ng-select [items]="status" (change)="onChange($event)" [(ngModel)]="_status" [clearable]="false"
+          bindLabel="Name" bindValue="Id">
+        </ng-select>
+      </div>
+
+      <span>Miktar Aralığı</span>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input placeholder="Minimum" type="text" [(ngModel)]="filter.startAmount" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input placeholder="Maksimum" type="text" [(ngModel)]="filter.endAmount" class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <span>Tarih Aralığı</span>
+      <div class="row">
+        <div class="col-sm-12">
+          <mat-form-field>
+            <mat-label>Başlangıç Tarihi</mat-label>
+            <input matInput [(ngModel)]="filter.dateStart" [matDatepicker]="tarihAraligiFirstPicker">
+            <mat-datepicker-toggle matSuffix [for]="tarihAraligiFirstPicker"></mat-datepicker-toggle>
+            <mat-datepicker #tarihAraligiFirstPicker></mat-datepicker>
+          </mat-form-field>
+          <!-- <div class="form-group">
+            <ng-datepicker [class]="w-100" [(ngModel)]="filter.dateStart" [options]="options"></ng-datepicker>
+          </div> -->
+        </div>
+        <div class="col-sm-12">
+          <mat-form-field>
+            <mat-label>Bitiş Tarihi</mat-label>
+            <input matInput [(ngModel)]="filter.dateEnd" [matDatepicker]="tarihAraligiSecondPicker">
+            <mat-datepicker-toggle matSuffix [for]="tarihAraligiSecondPicker"></mat-datepicker-toggle>
+            <mat-datepicker #tarihAraligiSecondPicker></mat-datepicker>
+          </mat-form-field>
+          <!-- <div class="form-group">
+            <ng-datepicker [class]="w-100" [(ngModel)]="filter.dateEnd" [options]="options2"></ng-datepicker>
+          </div> -->
+        </div>
+      </div>
+      <span *ngIf="isResponsible">Kişi</span>
+      <div class="row" *ngIf="isResponsible">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="filter.user">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button (click)="reset()" class="advance-btn small-btn black-btn" role="group">Filtreleri Temizle</button>
+        <button (click)="apply()" class="pull-right advance-btn success small-btn" role="group">Uygula </button>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>

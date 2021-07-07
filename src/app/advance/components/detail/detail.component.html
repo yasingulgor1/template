@@ -1,0 +1,91 @@
+<div class="advance-detail-content" *ngIf="!isLoading">
+  <div class="advance-user-card">
+    <div class="img">
+      <img src="{{ advance?.User?.ProfileImageUri }}">
+    </div>
+    <h3>{{ advance?.User?.DisplayName }}</h3>
+    <p>{{ advance?.CreatedAt | date:'dd.MM.yyyy HH:mm'}} Tarihli Avans Talebi</p>
+    <div class="clearfix"></div>
+  </div>
+
+  <div class="detail-item">
+    <div class="icon">
+      <img src="assets/img/advance/icon-date.png">
+    </div>
+    <div class="detail-content">
+      <span>İhtiyaç Tarihi</span>
+      <p>{{ advance?.RequiredDate | date:'dd.MM.yyyy' }}</p>
+    </div>
+  </div>
+
+  <div class="detail-item">
+    <div class="icon">
+      <img src="assets/img/advance/icon-money.png">
+    </div>
+    <div class="detail-content">
+      <span>Tutar</span>
+      <p>{{ advance?.Amount }} {{ advance?.Currency?.Name }}</p>
+    </div>
+  </div>
+
+  <div class="detail-item">
+    <div class="icon">
+      <img src="assets/img/advance/icon-return-money.png">
+    </div>
+    <div class="detail-content">
+      <span>Ödeme Tipi</span>
+      <p> <span *ngIf="advance.Installment.Number > 1"> {{advance?.Installment?.Number}} </span>  {{ advance?.Installment?.Name }} </p>
+    </div>
+  </div>
+
+  <div class="detail-item">
+    <div class="icon">
+      <img src="assets/img/advance/icon-description.png">
+    </div>
+    <div class="detail-content">
+      <span>Açıklama</span>
+      <p> {{ advance?.Description }}  </p>
+    </div>
+  </div>
+
+  <div class="detail-item">
+    <div class="icon">
+      <img src="assets/img/advance/icon-status.png">
+    </div>
+    <div class="detail-content">
+      <span>Durumu</span>
+      <p [class.expectant]="advance?.CurrentStep?.Status?.Key.toLowerCase() == 'waiting' || advance?.CurrentStep?.Status?.Key.toLowerCase() == 'pending'"
+        [class.confirm]="advance?.CurrentStep?.Status?.Key.toLowerCase() == 'accepted'"
+        [class.reject]="advance?.CurrentStep?.Status?.Key.toLowerCase() == 'declined'"> 
+          {{ advance?.CurrentStep?.Responsible?.DisplayName }} 
+        <b *ngIf="advance?.CurrentStep?.Status?.Key.toLowerCase() == 'waiting' || advance?.CurrentStep?.Status?.Key.toLowerCase() == 'pending'" >Bekleniyor</b>
+        <b *ngIf="advance?.CurrentStep?.Status?.Key.toLowerCase() == 'accepted'"> Onayladı </b>
+        <b *ngIf="advance?.CurrentStep?.Status?.Key.toLowerCase() == 'declined'"> Reddetti </b>  
+      </p>
+    </div>
+  </div>
+
+  <div class="detail-action" *ngIf="isVisible()">
+    <h3>Onay Bekleniyor</h3>
+    <app-accept-btn [currentUser]="user" [advance]="advance" class="advance-btn success" (onAcceptAdvanceClicked)="reload()" ></app-accept-btn>
+    <app-reject-btn [currentUser]="user" [advance]="advance" class="advance-btn reject" (onRejectAdvanceClicked)="reload()" ></app-reject-btn>
+  </div>
+
+  <div class="activite-logs">
+    <h3 class="title">Aktivite Logları</h3>
+    <ul>
+      <li *ngFor="let step of advance?.Steps" 
+        [class.accepted]="step?.Status?.Key.toLowerCase() == 'accepted'"
+        [class.waiting]="step?.Status?.Key.toLowerCase() == 'waiting' || step?.Status?.Key.toLowerCase() == 'pending'"
+        [class.declined]="step?.Status?.Key.toLowerCase() == 'declined'">
+        {{ step.ChangedAt | date:'dd/MM/yyyy HH:mm' }} - {{ step.Responsible.DisplayName }} {{ step?.Status?.Name }}</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="appLoading" *ngIf="isLoading">
+  <div class="loading-content center">
+      <img src="../../../../assets/img/loading.gif" />
+  </div>
+</div>

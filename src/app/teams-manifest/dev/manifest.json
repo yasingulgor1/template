@@ -1,0 +1,52 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.5",
+  "version": "1.0.0",
+  "id": "623ed898-2448-49b3-b7e4-dc4e0c077c4e",
+  "packageName": "org.peakup.advance",
+  "developer": {
+    "name": "PEAKUP",
+    "websiteUrl": "https://peakup.org/",
+    "privacyUrl": "https://peakup.org/en/velocity-privacy-policy",
+    "termsOfUseUrl": "https://peakup.org/en/velocity-terms-of-use",
+    "mpnId": "3661629"
+  },
+  "name": {
+    "short": "Advance Management",
+    "full": "Advance Management Application"
+  },
+  "description": {
+    "short": "Advance Management for Microsoft Teams",
+    "full": "Advance Management for Microsoft Teams"
+  },
+  "icons": {
+    "outline": "advance-outline.png",
+    "color": "advance-color.png"
+  },
+  "localizationInfo": {
+    "defaultLanguageTag": "en"
+  },
+  "accentColor": "#5BAD47",
+  "staticTabs": [
+    {
+      "entityId": "advance",
+      "name": "Advance",
+      "contentUrl": "https://advance-dev.peakup.org",
+      "websiteUrl": "https://advance-dev.peakup.org",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "webApplicationInfo": {
+    "id": "ef0a7f2b-c5d9-47fd-a546-607c5e46c03e",
+    "resource": "https://graph.microsoft.com"
+  },
+  "permissions": [
+    "identity"
+  ],
+  "validDomains": [
+    "*.peakup.org",
+    "login.microsoftonline.com"
+  ]
+}

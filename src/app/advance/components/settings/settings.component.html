@@ -1,0 +1,103 @@
+<div class="advance-container" *ngIf="!isLoading || setting">
+  <div class="m-t-20 m-b-20">
+    <h3 class="page-title">Yönetim Paneli</h3>
+    <div class="clearfix"></div>
+    <div class="row">
+
+      <div class="col-md-12">
+        <div class="advance-admin-box">
+          <div class="form-head">
+            <h3>Genel Ayarlar</h3>
+          </div>
+          <div class="form-content">
+
+            <div class="form-group">
+              <div class="input-group case-type-minus mb-3">
+                <label for="minAdvance">Minimum Avans Miktarı</label>
+                <div class="input-group mb-3">
+                  <input type="text" [(ngModel)]="setting.MinRequestLimit" class="form-control" placeholder="₺">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group case-type-minus mb-3">
+                <label for="minAdvance">Maksimum Avans Miktarı</label>
+                <div class="input-group mb-3">
+                  <input type="text" [(ngModel)]="setting.MaxRequestLimit" class="form-control" placeholder="₺">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group case-type-minus mb-3">
+                <label for="minAdvance">İstenebilecek en yakın tarih</label>
+                <div class="input-group mb-3">
+                  <input type="text" [(ngModel)]="setting.RequiredDateLimit" class="form-control" placeholder="Gün">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-head">
+              <h3 class="">Taksit Seçenekleri</h3>
+            </div>
+            <div class="form-content">
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <label class="m-r-15" for="isInstallment">Taksit Seçeneği Sunulsun mu ?</label>
+                  <input [(ngModel)]="setting.IsInstallment" type="checkbox">
+                </div>
+              </div>
+              <hr>
+              <div class="form-group">
+                <label>Taksit Seçenği Limiti</label>
+                <div class="input-group mb-3">
+                  <input type="text" [(ngModel)]="setting.InstallmentLimit" class="form-control" placeholder="₺">
+                </div>
+              </div>
+              <hr>
+              <div class="form-group">
+                <label>Taksit Seçeneği Ekle</label>
+                <div class="input-group mb-3">
+                  <input type="text" [(ngModel)]="_installment" (keyup.enter)="add()" class="form-control">
+                  <div class="input-group-append">
+                    <button (click)="add()" class="btn btn-outline-secondary" type="button"><i
+                        class="fa fa-plus"></i></button>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <label>Ekli ({{ setting.Installments.length }})</label>
+
+              <div class="form-group" *ngFor="let item of setting.Installments">
+                <div class="input-group mb-3">
+                  <label class="form-control">{{ item.Name }} </label>
+                  <div class="input-group-append">
+                    <button (click)="remove(item)" class="btn btn-outline-secondary" type="button"><i
+                        class="icon ion-ios-trash"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="_err" class="alert alert-danger">
+              {{ _err }}
+            </div>
+            <div *ngIf="_succ" class="alert alert-success">
+                {{ _succ }}
+              </div>
+            <div class="text-right m-t-20">
+              <button (click)="save()" class="advance-btn small-btn icon ion-ios-save"><i class="fa fa-check-mark"></i> Kaydet</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div><!-- .training-container -->
+</div>
+
+<div class="appLoading" *ngIf="isLoading">
+    <div class="loading-content center">
+        <img src="../../../../assets/img/loading.gif" />
+    </div>
+</div>

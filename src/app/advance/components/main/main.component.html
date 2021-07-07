@@ -1,0 +1,119 @@
+<div *ngIf="!showConsentModal" class="advance-container">
+    <div class="page-top">
+      <div class="buttons text-right">
+
+          <a href="" (click)="showSetting()" *ngIf="currentUser?.IsMasterAdmin" data-toggle="modal"
+          class="advance-btn icon ion-ios-settings"> Ayarlar </a>
+
+        <a href="" (click)="add()" data-toggle="modal"
+          class="advance-btn icon ion-ios-add-circle-outline"> Yeni Avans Talebi</a>
+      </div>
+    </div>
+    <div class="advance-list">
+      <div class="row">
+        <div class="col-md-10 col-sm-10 col-xs-10">
+          <div class="nav nav-tabs">
+            <a href="#home" class="active nav-item nav-link" id="home-tab" data-toggle="tab" role="tab"
+              aria-controls="home" aria-selected="true">AVANS TALEPLERİM</a>
+            <a href="#surecler" *ngIf="currentUser?.IsResponsible || currentUser?.IsMasterAdmin || currentUser?.IsIk" class="nav-item nav-link" id="surecler-tab" data-toggle="tab" role="tab"
+              aria-controls="surecler" aria-selected="true">ONAY SÜREÇLERİ</a>
+          </div>
+        </div>
+      </div>
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <app-list *ngIf="currentUser"
+            (onShowDetailClicked)="showDetail($event)"
+            (onShowEditClicked)="showEdit($event)"
+            [isResponsible]="false"
+            [currentUser]="currentUser"></app-list>
+        </div>
+        <div class="tab-pane fade" *ngIf="currentUser?.IsResponsible || currentUser?.IsMasterAdmin || currentUser?.IsIk" id="surecler" role="tabpane2" aria-labelledby="surecler-tab">
+            <app-list *ngIf="currentUser"
+              (onShowDetailClicked)="showDetail($event)"
+              (onShowEditClicked)="showEdit($event)"
+              [isResponsible]="true"
+              [currentUser]="currentUser"></app-list>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showConsentModal">
+    <button mat-raised-button color="primary" (click)="requestAuthForTeams()">
+      <div style="color: white;">GIVE CONSENT</div>
+    </button>
+  </div>
+
+   <!-- Modal control -->
+
+   <!-- Add -->
+   <div class="modal fade slide-right" id="add" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content-wrapper">
+        <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i></button>
+          <div class="modal-body advance-detail">
+
+            <app-add [currentUser]="currentUser"></app-add>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- add end -->
+
+  <!-- detail -->
+  <div class="modal fade slide-right" id="detail" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content-wrapper">
+        <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i></button>
+          <div class="modal-body advance-detail">
+
+            <app-detail *ngIf="selectedAdvance" [advance]="selectedAdvance" [isResponsible]="currentUser?.IsResponsible" [user]="currentUser" ></app-detail>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end detail -->
+
+  <!-- edit -->
+  <div class="modal fade slide-right" id="edit" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content-wrapper">
+        <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i></button>
+          <div class="modal-body advance-detail">
+
+            <app-edit *ngIf="selectedAdvance" [advance]="selectedAdvance" [isResponsible]="currentUser?.IsResponsible" [currentUser]="currentUser" ></app-edit>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end edit -->
+
+  <!-- settings -->
+  <div class="modal fade slide-right" id="settings" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content-wrapper">
+        <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i></button>
+          <div class="modal-body advance-detail">
+
+            <app-settings *ngIf="currentUser" [currentUser]="currentUser" ></app-settings>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end settings -->
+
+
+  <!--.modal-->

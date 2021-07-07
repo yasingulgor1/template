@@ -1,0 +1,22 @@
+.notification-list{
+    border: 0px
+}
+
+.no-padding{
+padding: 0px;
+}
+
+
+@media (min-width: 768px){
+
+    .modal-sm {
+       max-width: 600px !important;
+       min-width: 600px !important;
+    }
+
+}
+
+
+.header-inner > a{
+    margin-right: 10px;
+}

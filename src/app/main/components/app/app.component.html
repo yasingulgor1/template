@@ -1,0 +1,22 @@
+<ng-template [ngIf]="!loadingContext.show">
+
+</ng-template>
+<ng-template [ngIf]="loadingContext.show">
+  <div class="appLoading">
+    <div class="loading-content">
+      <!-- <div class="progress-circle-indeterminate m-t-45" style="display: block;"></div> -->
+      <img src="../../assets/img/loading.gif" />
+      <!-- <h3 class="page-title">{{loadingContext.message}}</h3> -->
+    </div>
+  </div>
+</ng-template>
+<peak-app *ngIf="appType == 'Teams'" [showSidebar]="false" [auth]="false">
+  <header></header>
+  <router-outlet></router-outlet>
+  <simple-notifications [options]="simpleNotificationsOptions"></simple-notifications>
+</peak-app>
+<peak-app *ngIf="appType == 'Web'" [auth]="false">
+  <header></header>
+  <router-outlet></router-outlet>
+  <simple-notifications [options]="simpleNotificationsOptions"></simple-notifications>
+</peak-app>

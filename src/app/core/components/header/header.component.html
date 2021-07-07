@@ -1,0 +1,35 @@
+<div class="header ">
+    <a href="#" class="btn-link toggle-sidebar d-lg-none pg pg-menu" data-toggle="sidebar"> </a>
+
+    <div class="">
+        <div class="brand inline   ">
+            <img src="assets/img/advance-logo.png" alt="logo" data-src="assets/img/advance-logo.png" width="190">
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center">
+        
+        <div *ngIf="currentUser" class="pull-left p-r-10 fs-14 font-heading d-lg-block d-none">
+            <span>{{'header:hiUser' | translate}} </span>
+            <span class="semi-bold" [innerHtml]="getCurrentUserDisplayName()"></span>
+        </div>
+
+        <div class="dropdown pull-right d-lg-block d-none">
+            <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <span class="thumbnail-wrapper d32 circular inline">
+                    <img [src]="currentUser?.profileImageUri" alt="" width="32" height="32">
+                </span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
+                <a (click)="reauthAsAdmin()" class="dropdown-item"><i class="pg-settings_small"></i>
+                    {{'buttons:addAdminPermissions' | translate}}</a>
+                <a (click)="logout()" class="clearfix bg-master-lighter dropdown-item">
+                    <span class="pull-left">{{'buttons:logout' | translate}}</span>
+                    <span class="pull-right"><i class="pg-power"></i></span>
+                </a>
+            </div>
+        </div>
+        
+    </div>
+</div>

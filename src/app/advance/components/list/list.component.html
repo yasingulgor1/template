@@ -1,0 +1,33 @@
+
+
+<div class="table-responsive" *ngIf="!isLoading">
+  <table class="table table-advance">
+    <tr>
+      Table Headers
+    </tr>
+    <tr >
+      Table Body!!!
+    </tr>
+  </table>
+  <app-pager 
+        [pager]="pager"
+        (onGoToPageClicked)="goToPage($event)">
+  </app-pager>
+</div>
+
+
+
+<div class="m-t-50 m-b-50" *ngIf="advances?.length == 0 && !isLoading">
+    <div class="m-b-20 text-center">
+        <img width="200" style="max-width:70%" src="{{getNotFoundImageUrl()}}">
+    </div>
+    <h3 class="text-center color-primary">Listelenecek Avans Bulunamadı</h3>
+</div>
+
+
+
+<div class="appLoading" *ngIf="isLoading">
+  <div class="loading-content text-center">
+      <img src="../../../../assets/img/loading.gif" />
+  </div>
+</div>
